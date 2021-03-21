@@ -1,24 +1,47 @@
-# app
+# README
+Dream Recorder(夢記録アプリ)
 
-## Project setup
-```
-npm install
-```
+# アプリケーション概要
+夢の記録と、手軽に夢占いをすることができるアプリです
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+# URL
+デプロイ後記述
 
-### Compiles and minifies for production
-```
-npm run build
-```
+# 要件定義
+一覧表示機能
+投稿機能
+削除機能
+検索機能
+web検索機能 
 
-### Lints and fixes files
-```
-npm run lint
-```
+# テーブル設計
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Dreams テーブル
+| Column   | Type    |Options                    |
+| -------- | ------- | ------------------------- |
+| name     | string  | null:false                |
+| tag      | string  | null:false                |
+| text     | string  | null:false                |
+
+
+### Association
+- has_many :tags, through: :dream_tag_relations
+
+## Tags テーブル
+| Column        | Type       | Options     |
+| ------------- | ---------- | ----------- |
+| name          | string     | null: false |
+
+### Association
+- has_many :dreams, through: :dream_tag_relations
+
+
+## Dream_tag_relations テーブル
+| Column       | Type       | Options           |
+| ------------ | ---------- | ----------------- |
+| tag          | references | foreign_key: true |
+| dream        | references | foreign_key: true |
+
+### Association
+- has_many :shop_tag_relations
+- has_many :shops, through: :shop_tag_relations
